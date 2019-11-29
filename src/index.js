@@ -1,6 +1,7 @@
 import List from './lib/list';
 import Header from './lib/header';
 //import Lecture from './lib/lecture';
+import filter, { getFilters } from './lib/filters';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
@@ -12,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     const header = new Header();
     header.makeHeader('Fyrirlestrar', 'VEFFORRITUN', './img/header.jpg');
+    filter();
     const list = new List();
-    list.load();
+    list.load(currentFilters());
   }
 });

@@ -86,6 +86,22 @@
     return Header;
   }();
 
+  var htmlButton;
+  var cssButton;
+  var jsButton;
+  var filterHtml = false;
+  var filterCss = false;
+  var filterJS = false;
+  var list = new List();
+  function filter() {
+    htmlButton = document.querySelector('.button--html');
+    cssButton = document.querySelector('.button--css');
+    jsButton = document.querySelector('.button--js');
+    htmlButton.addEventListener('click', filterHtml);
+    cssButton.addEventListener('click', filterCss);
+    jsButton.addEventListener('click', filterJS);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var page = document.querySelector('body');
     var isLecturePage = page.classList.contains('lecture-page');
@@ -93,8 +109,9 @@
     if (isLecturePage) ; else {
       var header = new Header();
       header.makeHeader('Fyrirlestrar', 'VEFFORRITUN', './img/header.jpg');
+      filter();
       var list = new List();
-      list.load();
+      list.load(currentFilters());
     }
   });
 
