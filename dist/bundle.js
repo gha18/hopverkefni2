@@ -53,6 +53,7 @@
     var backgrImg = document.createElement("div");
     backgrImg.classList.add('header__img', 'grid__row');
     backgrImg.style.background = "url(".concat(img, ") no-repeat");
+    backgrImg.style.backgroundSize = '100%, 100%';
     return backgrImg;
   }
   function makeProtector() {

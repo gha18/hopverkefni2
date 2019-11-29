@@ -5,7 +5,8 @@ export function makeBackgrImg(img) {
     backgrImg.classList.add('header__img', 'grid__row');
 
     backgrImg.style.background = `url(${img}) no-repeat`;
-    
+    backgrImg.style.backgroundSize = '100%, 100%';
+
     return backgrImg;
 }
 
