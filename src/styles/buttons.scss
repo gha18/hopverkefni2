@@ -28,4 +28,7 @@
 
 .selected {
     background-color: $light-green;
+    &:hover {
+        background-color: $light-green;
+    }
 }
