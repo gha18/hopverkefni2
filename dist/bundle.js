@@ -54,11 +54,11 @@
     _createClass(Header, [{
       key: "makeHeader",
       value: function makeHeader(title, cat, img) {
-        var backgrImg = document.createElement("div");
+        var backgrImg = document.createElement('div');
         backgrImg.classList.add('header__img', 'grid__row');
         backgrImg.style.background = "url(".concat(img, ") no-repeat");
         backgrImg.style.backgroundSize = '100%, 100%';
-        var protector = document.createElement("div");
+        var protector = document.createElement('div');
         protector.classList.add('protect');
         var header = document.createElement('div');
         header.classList.add('header__content');
@@ -86,9 +86,15 @@
   var filterCss = false;
   var filterJS = false;
   var list = new List();
+  function currentFilters() {
+    return {
+      htmlFilter: filterHtml,
+      cssFilter: filterCss,
+      jsFilter: filterJS
+    };
+  }
 
   function FilterHtml() {
-    debugger;
     filterHtml = !filterHtml;
     list.load(currentFilters());
     var el = document.querySelector('.button--html');
@@ -109,13 +115,6 @@
     if (el) el.classList.toggle('selected');
   }
 
-  function currentFilters() {
-    return {
-      htmlFilter: filterHtml,
-      cssFilter: filterCss,
-      jsFilter: filterJS
-    };
-  }
   function filter() {
     htmlButton = document.querySelector('.button--html');
     cssButton = document.querySelector('.button--css');

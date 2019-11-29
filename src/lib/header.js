@@ -5,23 +5,23 @@ export default class Header {
   }
 
   makeHeader(title, cat, img) {
-    const backgrImg = document.createElement("div");
+    const backgrImg = document.createElement('div');
     backgrImg.classList.add('header__img', 'grid__row');
 
     backgrImg.style.background = `url(${img}) no-repeat`;
     backgrImg.style.backgroundSize = '100%, 100%';
 
-    const protector = document.createElement("div");
+    const protector = document.createElement('div');
     protector.classList.add('protect');
 
-    var header = document.createElement('div');
+    const header = document.createElement('div');
     header.classList.add('header__content');
 
-    var category = document.createElement('p');
+    const category = document.createElement('p');
     category.innerHTML = cat;
     category.classList.add('header__category');
 
-    var headTitle = document.createElement('h1');
+    const headTitle = document.createElement('h1');
     headTitle.innerHTML = title;
     headTitle.classList.add('header__title');
 
