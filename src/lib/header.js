@@ -1,5 +1,3 @@
-import * as make from './make';
-
 export default class Header {
   constructor() {
     this.container = document.querySelector('.header');
@@ -7,9 +5,28 @@ export default class Header {
   }
 
   makeHeader(title, cat, img) {
-    const backgrImg = make.makeBackgrImg(img);
-    const protector = make.makeProtector();
-    const header = make.makeHeaderText(title, cat);
+    const backgrImg = document.createElement("div");
+    backgrImg.classList.add('header__img', 'grid__row');
+
+    backgrImg.style.background = `url(${img}) no-repeat`;
+    backgrImg.style.backgroundSize = '100%, 100%';
+
+    const protector = document.createElement("div");
+    protector.classList.add('protect');
+
+    var header = document.createElement('div');
+    header.classList.add('header__content');
+
+    var category = document.createElement('p');
+    category.innerHTML = cat;
+    category.classList.add('header__category');
+
+    var headTitle = document.createElement('h1');
+    headTitle.innerHTML = title;
+    headTitle.classList.add('header__title');
+
+    header.appendChild(category);
+    header.appendChild(headTitle);
 
     backgrImg.appendChild(protector);
     protector.appendChild(header);

@@ -48,33 +48,6 @@
     return List;
   }();
 
-  //import { createElement } from './helpers';
-  function makeBackgrImg(img) {
-    var backgrImg = document.createElement("div");
-    backgrImg.classList.add('header__img', 'grid__row');
-    backgrImg.style.background = "url(".concat(img, ") no-repeat");
-    backgrImg.style.backgroundSize = '100%, 100%';
-    return backgrImg;
-  }
-  function makeProtector() {
-    var protector = document.createElement("div");
-    protector.classList.add('protect');
-    return protector;
-  }
-  function makeHeaderText(title, cat) {
-    var heading = document.createElement('div');
-    heading.classList.add('header__content');
-    var category = document.createElement('p');
-    category.innerHTML = cat;
-    category.classList.add('header__category');
-    var headTitle = document.createElement('h1');
-    headTitle.innerHTML = title;
-    headTitle.classList.add('header__title');
-    heading.appendChild(category);
-    heading.appendChild(headTitle);
-    return heading;
-  }
-
   var Header =
   /*#__PURE__*/
   function () {
@@ -88,9 +61,22 @@
     _createClass(Header, [{
       key: "makeHeader",
       value: function makeHeader(title, cat, img) {
-        var backgrImg = makeBackgrImg(img);
-        var protector = makeProtector();
-        var header = makeHeaderText(title, cat);
+        var backgrImg = document.createElement("div");
+        backgrImg.classList.add('header__img', 'grid__row');
+        backgrImg.style.background = "url(".concat(img, ") no-repeat");
+        backgrImg.style.backgroundSize = '100%, 100%';
+        var protector = document.createElement("div");
+        protector.classList.add('protect');
+        var header = document.createElement('div');
+        header.classList.add('header__content');
+        var category = document.createElement('p');
+        category.innerHTML = cat;
+        category.classList.add('header__category');
+        var headTitle = document.createElement('h1');
+        headTitle.innerHTML = title;
+        headTitle.classList.add('header__title');
+        header.appendChild(category);
+        header.appendChild(headTitle);
         backgrImg.appendChild(protector);
         protector.appendChild(header);
         this.container.appendChild(backgrImg);
