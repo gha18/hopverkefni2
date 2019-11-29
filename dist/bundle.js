@@ -23,12 +23,6 @@
     return Constructor;
   }
 
-  function empty(element) {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-  }
-
   var List =
   /*#__PURE__*/
   function () {
@@ -40,8 +34,7 @@
 
     _createClass(List, [{
       key: "load",
-      value: function load() {
-        empty(this.container);
+      value: function load(filters) {//empty(this.container);
       }
     }]);
 
@@ -95,23 +88,24 @@
   var list = new List();
 
   function FilterHtml() {
+    debugger;
     filterHtml = !filterHtml;
     list.load(currentFilters());
-    var el = document.querySelector('.htmlButton');
+    var el = document.querySelector('.button--html');
     if (el) el.classList.toggle('selected');
   }
 
   function FilterCss() {
     filterCss = !filterCss;
     list.load(currentFilters());
-    var el = document.querySelector('.cssButton');
+    var el = document.querySelector('.button--css');
     if (el) el.classList.toggle('selected');
   }
 
   function FilterJS() {
     filterJS = !filterJS;
     list.load(currentFilters());
-    var el = document.querySelector('.jsButton');
+    var el = document.querySelector('.button--js');
     if (el) el.classList.toggle('selected');
   }
 
@@ -123,7 +117,6 @@
     };
   }
   function filter() {
-    debugger;
     htmlButton = document.querySelector('.button--html');
     cssButton = document.querySelector('.button--css');
     jsButton = document.querySelector('.button--js');

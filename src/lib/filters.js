@@ -11,23 +11,24 @@ let filterJS = false;
 const list = new List();
 
 function FilterHtml() {
+    debugger;
     filterHtml = !filterHtml;
     list.load(currentFilters());
-    const el = document.querySelector('.htmlButton');
+    const el = document.querySelector('.button--html');
     if (el) el.classList.toggle('selected');
 }
 
 function FilterCss() {
     filterCss = !filterCss;
     list.load(currentFilters());
-    const el = document.querySelector('.cssButton');
+    const el = document.querySelector('.button--css');
     if (el) el.classList.toggle('selected');
 }
 
 function FilterJS() {
     filterJS = !filterJS;
     list.load(currentFilters());
-    const el = document.querySelector('.jsButton');
+    const el = document.querySelector('.button--js');
     if (el) el.classList.toggle('selected');
 }
 
@@ -40,7 +41,6 @@ export function currentFilters() {
 }
 
 export default function filter() {
-    debugger;
     htmlButton = document.querySelector('.button--html');
     cssButton = document.querySelector('.button--css');
     jsButton = document.querySelector('.button--js');

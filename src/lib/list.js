@@ -5,7 +5,7 @@ export default class List {
     this.container = document.querySelector('.list');
   }
 
-  load() {
-    empty(this.container);
+  load(filters) {
+    //empty(this.container);
   }
 }

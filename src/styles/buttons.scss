@@ -12,6 +12,7 @@
         transition: background-color 300ms ease-in-out;
         padding: 1rem;
         margin: 20px;
+        font-family: $font-title;
         font-size: 1rem;
         font-weight: bold;
         text-align: center;
@@ -26,5 +27,5 @@
 }
 
 .selected {
-    color: $light-green;
+    background-color: $light-green;
 }
