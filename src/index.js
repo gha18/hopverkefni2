@@ -1,7 +1,7 @@
 import List from './lib/list';
 import Header from './lib/header';
 //import Lecture from './lib/lecture';
-import filter, { getFilters } from './lib/filters';
+import filter, { currentFilters } from './lib/filters';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');

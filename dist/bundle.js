@@ -93,13 +93,43 @@
   var filterCss = false;
   var filterJS = false;
   var list = new List();
+
+  function FilterHtml() {
+    filterHtml = !filterHtml;
+    list.load(currentFilters());
+    var el = document.querySelector('.htmlButton');
+    if (el) el.classList.toggle('selected');
+  }
+
+  function FilterCss() {
+    filterCss = !filterCss;
+    list.load(currentFilters());
+    var el = document.querySelector('.cssButton');
+    if (el) el.classList.toggle('selected');
+  }
+
+  function FilterJS() {
+    filterJS = !filterJS;
+    list.load(currentFilters());
+    var el = document.querySelector('.jsButton');
+    if (el) el.classList.toggle('selected');
+  }
+
+  function currentFilters() {
+    return {
+      htmlFilter: filterHtml,
+      cssFilter: filterCss,
+      jsFilter: filterJS
+    };
+  }
   function filter() {
+    debugger;
     htmlButton = document.querySelector('.button--html');
     cssButton = document.querySelector('.button--css');
     jsButton = document.querySelector('.button--js');
-    htmlButton.addEventListener('click', filterHtml);
-    cssButton.addEventListener('click', filterCss);
-    jsButton.addEventListener('click', filterJS);
+    htmlButton.addEventListener('click', FilterHtml);
+    cssButton.addEventListener('click', FilterCss);
+    jsButton.addEventListener('click', FilterJS);
   }
 
   document.addEventListener('DOMContentLoaded', function () {

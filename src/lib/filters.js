@@ -40,11 +40,12 @@ export function currentFilters() {
 }
 
 export default function filter() {
+    debugger;
     htmlButton = document.querySelector('.button--html');
     cssButton = document.querySelector('.button--css');
     jsButton = document.querySelector('.button--js');
   
-    htmlButton.addEventListener('click', filterHtml);
-    cssButton.addEventListener('click', filterCss);
-    jsButton.addEventListener('click', filterJS);
+    htmlButton.addEventListener('click', FilterHtml);
+    cssButton.addEventListener('click', FilterCss);
+    jsButton.addEventListener('click', FilterJS);
   }
