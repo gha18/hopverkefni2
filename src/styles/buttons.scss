@@ -1,34 +1,37 @@
 .filter {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: $gutter auto;
+
+  &__buttons {
     display: flex;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 40px; 
-    &__buttons {
-        display: flex;
-        margin: auto;
+    margin: auto;
+  }
+
+  &__btn {
+    padding: 1rem;
+    margin: 20px;
+    font-family: $font-title;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: $light-grey;
+    border: transparent;
+    border-radius: 1rem;
+    transition: background-color 300ms ease-in-out;
+
+    &:hover {
+      background-color: #aaa;
     }
-    &__btn {
-        transition: background-color 300ms ease-in-out;
-        padding: 1rem;
-        margin: 20px;
-        font-family: $font-title;
-        font-size: 1rem;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        background-color: $light-grey;
-        border: transparent;
-        border-radius: 1rem; 
-        &:hover {
-            background-color: #aaa; 
-        }
-    }
+  }
 }
 
 .selected {
+  background-color: $light-green;
+
+  &:hover {
     background-color: $light-green;
-    &:hover {
-        background-color: $light-green;
-    }
+  }
 }
