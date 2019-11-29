@@ -1,4 +1,5 @@
 @import "config";
+@import "header";
 
 * {
   padding: 0;
@@ -23,5 +24,12 @@ html { /* stylelint-disable-line */
 img { /* stylelint-disable-line */
   max-width: 100%;
 }
+
+.protect {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #999;
+  opacity: 0.6; }
 
 // TODO import
