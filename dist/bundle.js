@@ -63,7 +63,7 @@
         var header = document.createElement('div');
         header.classList.add('header__content');
         var category = document.createElement('p');
-        category.innerHTML = cat;
+        category.innerHTML = cat.toUpperCase();
         category.classList.add('header__category');
         var headTitle = document.createElement('h1');
         headTitle.innerHTML = title;
@@ -77,6 +77,191 @@
     }]);
 
     return Header;
+  }();
+
+  var Lecture =
+  /*#__PURE__*/
+  function () {
+    function Lecture() {
+      _classCallCheck(this, Lecture);
+
+      this.header = new Header();
+      this.container = document.querySelector('.lecture');
+      this.url = '../lectures.json';
+    }
+
+    _createClass(Lecture, [{
+      key: "addVideo",
+      value: function addVideo(link) {
+        var lecture = this.container;
+        var video = document.createElement('iframe');
+        video.setAttribute('src', link);
+        video.setAttribute('frameborder', 0);
+        video.setAttribute('allowfullscreen', 0);
+        video.classList.add('lecture__video');
+        lecture.appendChild(video);
+      }
+    }, {
+      key: "addText",
+      value: function addText(text) {
+        var lecture = this.container;
+        var cont = document.createElement('div');
+        cont.classList.add('lecture__paragraph__container');
+        var paragraphs = text.split('\n');
+
+        for (var i = 0; i < paragraphs.length; i += 1) {
+          var p = document.createElement('p');
+          p.innerHTML = paragraphs[i];
+          p.classList.add('lecture__paragraph');
+          cont.appendChild(p);
+        }
+
+        lecture.appendChild(cont);
+      }
+    }, {
+      key: "addQuote",
+      value: function addQuote(content) {
+        var lecture = this.container;
+        var quoteDiv = document.createElement('div');
+        quoteDiv.classList.add('lecture__quote');
+        var quote = document.createElement('p');
+        quote.innerHTML = content.data;
+        quote.classList.add('lecture__quote__text');
+        quoteDiv.appendChild(quote);
+
+        if (content.attribute) {
+          var att = document.createElement('p');
+          att.innerHTML = content.attribute;
+          att.classList.add('lecture__quote__attribute');
+          quoteDiv.appendChild(att);
+        }
+
+        lecture.appendChild(quoteDiv);
+      }
+    }, {
+      key: "addImage",
+      value: function addImage(content) {
+        var lecture = this.container;
+        var imgCont = document.createElement('div');
+        imgCont.classList.add('lecture__image__container');
+        var img = document.createElement('img');
+        img.setAttribute('src', content.data);
+        img.classList.add('lecture__image');
+        var protector = document.createElement('div');
+        protector.classList.add('protect');
+        img.appendChild(protector);
+        imgCont.appendChild(img);
+
+        if (content.caption) {
+          var cap = document.createElement('p');
+          cap.innerHTML = content.caption;
+          cap.classList.add('lecture__image__caption');
+          imgCont.appendChild(cap);
+        }
+
+        lecture.appendChild(imgCont);
+      }
+    }, {
+      key: "addHeading",
+      value: function addHeading(content) {
+        var lecture = this.container;
+        var heading = document.createElement('h1');
+        heading.innerHTML = content;
+        heading.classList.add('lecture__heading');
+        lecture.appendChild(heading);
+      }
+    }, {
+      key: "addList",
+      value: function addList(content) {
+        var lecture = this.container;
+        var list = document.createElement('ul');
+        list.classList.add('lecture__list');
+
+        for (var i = 0; i < content.length; i += 1) {
+          var item = document.createElement('li');
+          item.innerHTML = content[i];
+          item.classList.add('lecture__list__item');
+          list.appendChild(item);
+        }
+
+        lecture.appendChild(list);
+      }
+    }, {
+      key: "addCode",
+      value: function addCode(code) {
+        debugger;
+        var lecture = this.container;
+        var xmp = document.createElement('xmp');
+        xmp.innerHTML = code;
+        xmp.classList.add('lecture__code');
+        lecture.appendChild(xmp);
+      }
+    }, {
+      key: "makeContent",
+      value: function makeContent(content) {
+        for (var i = 0; i < content.length; i += 1) {
+          if (content[i].type === 'youtube') {
+            this.addVideo(content[i].data);
+          } else if (content[i].type === 'text') {
+            this.addText(content[i].data);
+          } else if (content[i].type === 'quote') {
+            this.addQuote(content[i]);
+          } else if (content[i].type === 'image') {
+            this.addImage(content[i]);
+          } else if (content[i].type === 'heading') {
+            this.addHeading(content[i].data);
+          } else if (content[i].type === 'list') {
+            this.addList(content[i].data);
+          } else if (content[i].type === 'code') {
+            this.addCode(content[i].data);
+          }
+        }
+      }
+    }, {
+      key: "makeLecture",
+      value: function makeLecture(data) {
+        var lecture = this.containter; //empty(lecture);
+
+        this.makeContent(data.content);
+      }
+    }, {
+      key: "loadLecture",
+      value: function loadLecture(thisSlug) {
+        var _this = this;
+
+        return fetch(this.url).then(function (res) {
+          if (!res.ok) {
+            throw new Error('Gat ekki sótt fyrirlestra');
+          }
+
+          return res.json();
+        }).then(function (data) {
+          var found = data.lectures.find(function (lecture) {
+            return lecture.slug === thisSlug;
+          });
+
+          if (!found) {
+            throw new Error('Fyrirlestur fannst ekki');
+          }
+
+          _this.header.makeHeader(found.title, found.category, found.image);
+
+          return found;
+        });
+      }
+    }, {
+      key: "load",
+      value: function load() {
+        var _this2 = this;
+
+        var slug = new URLSearchParams(window.location.search).get('slug');
+        this.loadLecture(slug).then(function (data) {
+          _this2.makeLecture(data);
+        });
+      }
+    }]);
+
+    return Lecture;
   }();
 
   var htmlButton;
@@ -128,7 +313,10 @@
     var page = document.querySelector('body');
     var isLecturePage = page.classList.contains('lecture-page');
 
-    if (isLecturePage) ; else {
+    if (isLecturePage) {
+      var lecture = new Lecture();
+      lecture.load();
+    } else {
       var header = new Header();
       header.makeHeader('Fyrirlestrar', 'VEFFORRITUN', './img/header.jpg');
       filter();

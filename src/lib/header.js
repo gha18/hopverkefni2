@@ -18,7 +18,7 @@ export default class Header {
     header.classList.add('header__content');
 
     const category = document.createElement('p');
-    category.innerHTML = cat;
+    category.innerHTML = cat.toUpperCase();
     category.classList.add('header__category');
 
     const headTitle = document.createElement('h1');

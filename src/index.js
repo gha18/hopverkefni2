@@ -1,6 +1,6 @@
 import List from './lib/list';
 import Header from './lib/header';
-//import Lecture from './lib/lecture';
+import Lecture from './lib/lecture';
 import filter, { currentFilters } from './lib/filters';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const isLecturePage = page.classList.contains('lecture-page');
 
   if (isLecturePage) {
-    //const lecture = new Lecture();
-    //lecture.load();
+    const lecture = new Lecture();
+    lecture.load();
   } else {
     const header = new Header();
     header.makeHeader('Fyrirlestrar', 'VEFFORRITUN', './img/header.jpg');
