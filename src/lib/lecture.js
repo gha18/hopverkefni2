@@ -1,5 +1,4 @@
 import Header from './header';
-import empty from './helpers';
 
 export default class Lecture {
   constructor() {
@@ -21,7 +20,7 @@ export default class Lecture {
   addText(text) {
     const lecture = this.container;
     const cont = document.createElement('div');
-    cont.classList.add('lecture__paragraph__container')
+    cont.classList.add('lecture__paragraph__container');
     const paragraphs = text.split('\n');
     for (let i = 0; i < paragraphs.length; i += 1) {
       const p = document.createElement('p');
@@ -60,12 +59,12 @@ export default class Lecture {
     protector.classList.add('protect');
     img.appendChild(protector);
     imgCont.appendChild(img);
-    if(content.caption) {
+    if (content.caption) {
       const cap = document.createElement('p');
       cap.innerHTML = content.caption;
-      cap.classList.add('lecture__image__caption')
+      cap.classList.add('lecture__image__caption');
       imgCont.appendChild(cap);
-    } 
+    }
     lecture.appendChild(imgCont);
   }
 
@@ -91,7 +90,6 @@ export default class Lecture {
   }
 
   addCode(code) {
-    debugger;
     const lecture = this.container;
     const xmp = document.createElement('xmp');
     xmp.innerHTML = code;
@@ -119,32 +117,26 @@ export default class Lecture {
     }
   }
 
-  makeLecture(data) {
-    const lecture = this.containter;
-    //empty(lecture);
-    this.makeContent(data.content);
-  }
-
   loadLecture(thisSlug) {
     return fetch(this.url).then((res) => {
-        if (!res.ok) {
-          throw new Error('Gat ekki sótt fyrirlestra');
-        }
-        return res.json();
-      }).then((data) => {
-        const found = data.lectures.find(lecture => lecture.slug === thisSlug);
-        if (!found) {
-          throw new Error('Fyrirlestur fannst ekki');
-        }
-        this.header.makeHeader(found.title, found.category, found.image);
-        return found;
-      });
+      if (!res.ok) {
+        throw new Error('Gat ekki sótt fyrirlestra');
+      }
+      return res.json();
+    }).then((data) => {
+      const found = data.lectures.find(lecture => lecture.slug === thisSlug);
+      if (!found) {
+        throw new Error('Fyrirlestur fannst ekki');
+      }
+      this.header.makeHeader(found.title, found.category, found.image);
+      return found;
+    });
   }
 
   load() {
     const slug = new URLSearchParams(window.location.search).get('slug');
     this.loadLecture(slug).then((data) => {
-      this.makeLecture(data);
+      this.makeContent(data.content);
     });
   }
 }

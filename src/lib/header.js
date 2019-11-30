@@ -9,14 +9,12 @@ export default class Header {
     backgrImg.classList.add('header__img', 'grid__row');
     backgrImg.style.backgroundSize = '100%, 100%';
 
-    debugger;
-    if(img) {
-      debugger;
+    if (img) {
       backgrImg.style.background = `url(${img}) no-repeat`;
     } else {
       backgrImg.style.backgroundColor = '#999';
     }
-    
+
     const protector = document.createElement('div');
     protector.classList.add('protect');
 

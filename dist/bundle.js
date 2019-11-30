@@ -57,10 +57,8 @@
         var backgrImg = document.createElement('div');
         backgrImg.classList.add('header__img', 'grid__row');
         backgrImg.style.backgroundSize = '100%, 100%';
-        debugger;
 
         if (img) {
-          debugger;
           backgrImg.style.background = "url(".concat(img, ") no-repeat");
         } else {
           backgrImg.style.backgroundColor = '#999';
@@ -197,7 +195,6 @@
     }, {
       key: "addCode",
       value: function addCode(code) {
-        debugger;
         var lecture = this.container;
         var xmp = document.createElement('xmp');
         xmp.innerHTML = code;
@@ -224,13 +221,6 @@
             this.addCode(content[i].data);
           }
         }
-      }
-    }, {
-      key: "makeLecture",
-      value: function makeLecture(data) {
-        var lecture = this.containter; //empty(lecture);
-
-        this.makeContent(data.content);
       }
     }, {
       key: "loadLecture",
@@ -264,7 +254,7 @@
 
         var slug = new URLSearchParams(window.location.search).get('slug');
         this.loadLecture(slug).then(function (data) {
-          _this2.makeLecture(data);
+          _this2.makeContent(data.content);
         });
       }
     }]);
