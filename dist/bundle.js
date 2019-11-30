@@ -56,8 +56,16 @@
       value: function makeHeader(title, cat, img) {
         var backgrImg = document.createElement('div');
         backgrImg.classList.add('header__img', 'grid__row');
-        backgrImg.style.background = "url(".concat(img, ") no-repeat");
         backgrImg.style.backgroundSize = '100%, 100%';
+        debugger;
+
+        if (img) {
+          debugger;
+          backgrImg.style.background = "url(".concat(img, ") no-repeat");
+        } else {
+          backgrImg.style.backgroundColor = '#999';
+        }
+
         var protector = document.createElement('div');
         protector.classList.add('protect');
         var header = document.createElement('div');
