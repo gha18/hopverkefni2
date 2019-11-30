@@ -21,7 +21,6 @@ Verkefnið innheldur mikið af skjölum. Mörg skjalanna eru vistaðar í möppu
    vii)Dev: til að keyra sass og browser-sync
 
 
-
 2) HTML skjöl:
 
 Í verkefninu eru tvö HTML skjöl, annars vegar index.html sem vísar manni beint á forsíðu verkisins og hins vegar fyrirlestur.html sem er HTML skjal fyrir síðurar sem innihalda fyrirlestrana.
