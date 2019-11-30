@@ -109,7 +109,8 @@
       }
     }, {
       key: "addText",
-      value: function addText(text) {
+      value: function addText(content) {
+        var text = content.replace(/</g, '&lt');
         var lecture = this.container;
         var cont = document.createElement('div');
         cont.classList.add('lecture__paragraph__container');
@@ -185,7 +186,8 @@
 
         for (var i = 0; i < content.length; i += 1) {
           var item = document.createElement('li');
-          item.innerHTML = content[i];
+          var text = content[i].replace(/</g, '&lt');
+          item.innerHTML = text;
           item.classList.add('lecture__list__item');
           list.appendChild(item);
         }

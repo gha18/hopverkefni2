@@ -17,7 +17,8 @@ export default class Lecture {
     lecture.appendChild(video);
   }
 
-  addText(text) {
+  addText(content) {
+    const text = content.replace(/</g, '&lt');
     const lecture = this.container;
     const cont = document.createElement('div');
     cont.classList.add('lecture__paragraph__container');
@@ -82,7 +83,8 @@ export default class Lecture {
     list.classList.add('lecture__list');
     for (let i = 0; i < content.length; i += 1) {
       const item = document.createElement('li');
-      item.innerHTML = content[i];
+      const text = content[i].replace(/</g, '&lt');
+      item.innerHTML = text;
       item.classList.add('lecture__list__item');
       list.appendChild(item);
     }
