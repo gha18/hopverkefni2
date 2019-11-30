@@ -22,8 +22,9 @@ Verkefnið innheldur mikið af skjölum. Mörg skjalanna eru vistaðar í möppu
 
 
 2) HTML skjöl:
-
-Í verkefninu eru tvö HTML skjöl, annars vegar index.html sem vísar manni beint á forsíðu verkisins og hins vegar fyrirlestur.html sem er HTML skjal fyrir síðurar sem innihalda fyrirlestrana.
+   
+   Í verkefninu eru tvö HTML skjöl, annars vegar index.html sem vísar manni beint á forsíðu verkisins og hins vegar        
+   fyrirlestur.html sem er HTML skjal fyrir síðurar sem innihalda fyrirlestrana.
 
 
 3) Img mappan inniheldur fullt af myndum á formi jpg, png, svg og gif sem eru settar upp á vefsíðuna með javascript.
