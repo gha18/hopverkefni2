@@ -12,14 +12,14 @@ Verkefnið innheldur mikið af skjölum. Mörg skjalanna eru vistaðar í möppu
 1) Í node_modules möppunni eru öll þau tól og tæki sem verkefnið þarf til þess að vefsíðan virki og eru upplýsingar um öll
    uppsett script ásamt dependencies vistaðar í Í package.json/package-lock.json skráunum. Meðal þeirra uppsettu tóla eru:
    
-   i) Eslint: skrá sem segir til um hvernig lint fyrir JavaScript skrár skuli háttað
-   ii) Stylelint: linter fyrir Css og Sass sem hjálpar forritaranum ( okkur ) að finna villur eða athugasemdir
-   iii) Test: Til að keyra bæði eslint og stylelint
-   iv) Browser-sync: Tól sem gerir manni kleift að forrita án þess að þurfa refresha vafranum, 
-       einnig nauðsynlegt að keyra verkefnið
-   v)Sass: Bætir við CSS virkni
-   vi)Sass-watch: til að fylgjast með sass skrám og þýða
-   vii)Dev: til að keyra sass og browser-sync
+i) Eslint: skrá sem segir til um hvernig lint fyrir JavaScript skrár skuli háttað
+ii) Stylelint: linter fyrir Css og Sass sem hjálpar forritaranum ( okkur ) að finna villur eða athugasemdir
+iii) Test: Til að keyra bæði eslint og stylelint
+iv) Browser-sync: Tól sem gerir manni kleift að forrita án þess að þurfa refresha vafranum, 
+    einnig nauðsynlegt að keyra verkefnið
+v) Sass: Bætir við CSS virkni
+vi) Sass-watch: til að fylgjast með sass skrám og þýða
+vii) Dev: til að keyra sass og browser-sync
 
 
 2) HTML skjöl:
