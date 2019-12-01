@@ -58,7 +58,7 @@
     flex-shrink: 0;
     transition: background-color 300ms ease-in-out;
 
-    &__:hover {
+    &:hover {
       background-color: $medium-grey;
     }
   }
