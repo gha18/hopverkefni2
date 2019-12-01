@@ -1,4 +1,5 @@
 import empty from './helpers';
+import { loadSavedLectures } from './storage';
 
 export default class List {
   constructor() {
@@ -45,6 +46,17 @@ export default class List {
     div.appendChild(title);
 
     url.appendChild(div1);
+
+    const fin = loadSavedLectures();
+    if (fin.find(l => l === `${lecture.slug}`)) {
+      const checkCont = document.createElement('div');
+      checkCont.classList.add('lecture__check__container');
+      const check = document.createElement('h1');
+      check.classList.add('lecture__check');
+      check.innerHTML = '✓';
+      checkCont.appendChild(check);
+      div1.appendChild(checkCont);
+    }
 
     return url;
   }

@@ -29,6 +29,30 @@
     }
   }
 
+  var LOCALSTORAGE_KEY = 'finished_lectures';
+  function loadSavedLectures() {
+    var finJSON = localStorage.getItem(LOCALSTORAGE_KEY);
+    var fin = JSON.parse(finJSON) || [];
+    return fin;
+  }
+  function isSaved(slug) {
+    var fin = loadSavedLectures();
+    var count = fin.indexOf(slug);
+    return count >= 0;
+  }
+  function saveLectures(slug) {
+    var fin = loadSavedLectures();
+    var count = fin.indexOf(slug);
+
+    if (isSaved(slug)) {
+      fin.splice(count, 1);
+    } else {
+      fin.push(slug);
+    }
+
+    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fin));
+  }
+
   var List =
   /*#__PURE__*/
   function () {
@@ -78,6 +102,20 @@
         title.classList.add('lectures__title');
         div.appendChild(title);
         url.appendChild(div1);
+        var fin = loadSavedLectures();
+
+        if (fin.find(function (l) {
+          return l === "".concat(lecture.slug);
+        })) {
+          var checkCont = document.createElement('div');
+          checkCont.classList.add('lecture__check__container');
+          var check = document.createElement('h1');
+          check.classList.add('lecture__check');
+          check.innerHTML = '✓';
+          checkCont.appendChild(check);
+          div1.appendChild(checkCont);
+        }
+
         return url;
       }
     }, {
@@ -173,6 +211,24 @@
     }
 
     _createClass(Lecture, [{
+      key: "finishLecture",
+      value: function finishLecture(e) {
+        var target = e.target;
+        var innerText = target.innerText;
+
+        if (innerText === 'Klára fyrirlestur') {
+          target.innerText = '✓ Fyrirlestur kláraður';
+          target.style.color = '#2d2';
+        } else {
+          target.innerText = 'Klára fyrirlestur';
+          target.style.color = '#000';
+        }
+
+        var qs = new URLSearchParams(window.location.search);
+        var slug = qs.get('slug');
+        saveLectures(slug);
+      }
+    }, {
       key: "addVideo",
       value: function addVideo(link) {
         var lecture = this.container;
@@ -322,6 +378,12 @@
 
           _this.header.makeHeader(found.title, found.category, found.image);
 
+          if (isSaved(found.slug)) {
+            var button = document.querySelector('.button--complete');
+            button.innerText = '✓ Fyrirlestur kláraður';
+            button.style.color = '#2d2';
+          }
+
           return found;
         });
       }
@@ -330,6 +392,8 @@
       value: function load() {
         var _this2 = this;
 
+        var button = document.querySelector('.button--complete');
+        button.addEventListener('click', this.finishLecture);
         if (this.container !== null) empty(this.container);
         var slug = new URLSearchParams(window.location.search).get('slug');
         this.loadLecture(slug).then(function (data) {

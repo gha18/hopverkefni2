@@ -1,11 +1,27 @@
 import empty from './helpers';
 import Header from './header';
+import { saveLectures, isSaved } from './storage';
 
 export default class Lecture {
   constructor() {
     this.header = new Header();
     this.container = document.querySelector('.lecture');
     this.url = '../lectures.json';
+  }
+
+  finishLecture(e) {
+    const { target } = e;
+    const { innerText } = target;
+    if (innerText === 'Klára fyrirlestur') {
+      target.innerText = '✓ Fyrirlestur kláraður';
+      target.style.color = '#2d2';
+    } else {
+      target.innerText = 'Klára fyrirlestur';
+      target.style.color = '#000';
+    }
+    const qs = new URLSearchParams(window.location.search);
+    const slug = qs.get('slug');
+    saveLectures(slug);
   }
 
   addVideo(link) {
@@ -132,11 +148,18 @@ export default class Lecture {
         throw new Error('Fyrirlestur fannst ekki');
       }
       this.header.makeHeader(found.title, found.category, found.image);
+      if (isSaved(found.slug)) {
+        const button = document.querySelector('.button--complete');
+        button.innerText = '✓ Fyrirlestur kláraður';
+        button.style.color = '#2d2';
+      }
       return found;
     });
   }
 
   load() {
+    const button = document.querySelector('.button--complete');
+    button.addEventListener('click', this.finishLecture);
     if (this.container !== null) empty(this.container);
     const slug = new URLSearchParams(window.location.search).get('slug');
     this.loadLecture(slug).then((data) => {

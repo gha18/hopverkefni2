@@ -5,6 +5,16 @@
   padding: $gutter;
   margin: 0.5*$gutter auto;
 
+  &__check {
+    padding: 0.5*$gutter;
+    color: $light-green;
+    align-self: center;
+
+    &__container {
+      display: flex;
+    }
+  }
+
   &__video {
     width: 100%;
     height: 400px;
