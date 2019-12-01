@@ -23,18 +23,93 @@
     return Constructor;
   }
 
+  function empty(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
+
   var List =
   /*#__PURE__*/
   function () {
     function List() {
       _classCallCheck(this, List);
 
-      this.container = document.querySelector('.list');
+      this.container = document.querySelector('.lectures');
     }
 
     _createClass(List, [{
+      key: "onClickLecture",
+      value: function onClickLecture(e) {
+        window.location.href = e.currentTarget.children[0].textContent;
+      }
+    }, {
+      key: "createListItem",
+      value: function createListItem(lecture) {
+        var url = document.createElement('a');
+        url.classList.add('lectures__link');
+        url.classList.add('grid__col');
+        url.href = "../../fyrirlestur.html?slug=".concat(lecture.slug);
+
+        if (lecture.thumbnail) {
+          var thumbnail = document.createElement('img');
+          thumbnail.src = "".concat(lecture.thumbnail);
+          thumbnail.classList.add('lectures__thumbnail');
+          url.appendChild(thumbnail);
+        } else {
+          var _thumbnail = document.createElement('div');
+
+          _thumbnail.classList.add('lectures__thumbnail--none');
+
+          url.appendChild(_thumbnail);
+        }
+
+        var div1 = document.createElement('div');
+        div1.classList.add('lectures__bottom');
+        var div = document.createElement('div');
+        div.classList.add('lectures__text');
+        div1.appendChild(div);
+        var category = document.createElement('p');
+        category.innerHTML = "".concat(lecture.category).toUpperCase();
+        category.classList.add('lectures__category');
+        div.appendChild(category);
+        var title = document.createElement('h2');
+        title.innerHTML = "".concat(lecture.title);
+        title.classList.add('lectures__title');
+        div.appendChild(title);
+        url.appendChild(div1);
+        return url;
+      }
+    }, {
+      key: "init",
+      value: function init(data, filters) {
+        var _this = this;
+
+        if (data === null) return;
+        if (this.container !== null) empty(this.container);
+        var div = document.createElement('div');
+        this.container.appendChild(div);
+        div.classList.add('grid__row');
+        data.lectures.forEach(function (lecture) {
+          if (filters.htmlFilter && filters.cssFilter && filters.jsFilter || !filters.htmlFilter && !filters.cssFilter && !filters.jsFilter) {
+            div.appendChild(_this.createListItem(lecture));
+          } else {
+            if (filters.htmlFilter && lecture.category === 'html') div.appendChild(_this.createListItem(lecture));
+            if (filters.cssFilter && lecture.category === 'css') div.appendChild(_this.createListItem(lecture));
+            if (filters.jsFilter && lecture.category === 'javascript') div.appendChild(_this.createListItem(lecture));
+          }
+        });
+      }
+    }, {
       key: "load",
-      value: function load(filters) {//empty(this.container);
+      value: function load(filters) {
+        var _this2 = this;
+
+        fetch('../../lectures.json').then(function (responce) {
+          return responce.json();
+        }).then(function (json) {
+          return _this2.init(json, filters);
+        });
       }
     }]);
 
@@ -60,6 +135,7 @@
 
         if (img) {
           backgrImg.style.background = "url(".concat(img, ") no-repeat");
+          backgrImg.style.backgroundSize = 'cover';
         } else {
           backgrImg.style.backgroundColor = '#999';
         }
@@ -254,6 +330,7 @@
       value: function load() {
         var _this2 = this;
 
+        if (this.container !== null) empty(this.container);
         var slug = new URLSearchParams(window.location.search).get('slug');
         this.loadLecture(slug).then(function (data) {
           _this2.makeContent(data.content);

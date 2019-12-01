@@ -1,3 +1,4 @@
+import empty from './helpers';
 import Header from './header';
 
 export default class Lecture {
@@ -136,6 +137,7 @@ export default class Lecture {
   }
 
   load() {
+    if (this.container !== null) empty(this.container);
     const slug = new URLSearchParams(window.location.search).get('slug');
     this.loadLecture(slug).then((data) => {
       this.makeContent(data.content);

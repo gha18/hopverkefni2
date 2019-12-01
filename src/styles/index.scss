@@ -1,0 +1,92 @@
+@import "config";
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  offset: $gutter;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: $gutter 0;
+    margin-right: -0.5*$gutter;
+    margin-left: -0.5*$gutter;
+  }
+
+  &__col {
+    width: 33.33%;
+    padding: 0.5*$gutter;
+  }
+}
+
+@media (max-width: 1240px) and (min-width: 1200px) {
+  .grid {
+    padding: 0 calc($gutter20px - (100vw - 1200px) / 2);
+  }
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    padding: 0 $gutter;
+  }
+}
+
+@media (max-width: 800px) {
+  .grid__col {
+    width: 50%;
+  }
+}
+@media (max-width: 500px) {
+  .grid__col {
+    width: 100%;
+  }
+}
+
+.lectures {
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+  &__link {
+    display: flex;
+    padding: 0.5*$gutter;
+    color: $black;
+    text-decoration: none;
+    flex-flow: column wrap;
+    background-color: $light-grey;
+    background-clip: content-box;
+    align-content: stretch;
+    flex-shrink: 0;
+    transition: background-color 300ms ease-in-out;
+
+    &__:hover {
+      background-color: $medium-grey;
+    }
+  }
+
+  &__text {
+    padding: 0.5*$gutter;
+  }
+
+  &__category {
+    font-family: $font-title;
+  }
+
+  &__thumbnail {
+    flex-grow: 1;
+
+    &--none {
+      flex: 1 0;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 500px) {
+  .lectures__thumbnail--none {
+    height: 0;
+  }
+}

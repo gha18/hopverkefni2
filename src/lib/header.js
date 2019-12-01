@@ -11,6 +11,7 @@ export default class Header {
 
     if (img) {
       backgrImg.style.background = `url(${img}) no-repeat`;
+      backgrImg.style.backgroundSize = 'cover';
     } else {
       backgrImg.style.backgroundColor = '#999';
     }
